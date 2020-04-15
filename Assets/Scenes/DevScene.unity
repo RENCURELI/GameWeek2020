@@ -331,6 +331,14 @@ MonoBehaviour:
   gridPrefab: {fileID: 7320397694287109937, guid: 3f3f32df4a2d12543b807db5d19b7f57,
     type: 3}
   generationStart: {x: 0, y: 0, z: 0}
+  startX: 0
+  startY: 0
+  endX: 2
+  endY: 2
+  path: []
+  findDistance: 0
+  movePawn: 0
+  movedPawn: {fileID: 0}
 --- !u!4 &1123513463
 Transform:
   m_ObjectHideFlags: 0
@@ -360,7 +368,7 @@ PrefabInstance:
     - target: {fileID: 2954282813540812244, guid: 62d9f53ed61a6a441bf315968e97e3e1,
         type: 3}
       propertyPath: m_LocalPosition.x
-      value: 0
+      value: 3.58
       objectReference: {fileID: 0}
     - target: {fileID: 2954282813540812244, guid: 62d9f53ed61a6a441bf315968e97e3e1,
         type: 3}
@@ -370,7 +378,7 @@ PrefabInstance:
     - target: {fileID: 2954282813540812244, guid: 62d9f53ed61a6a441bf315968e97e3e1,
         type: 3}
       propertyPath: m_LocalPosition.z
-      value: 0
+      value: -12.42
       objectReference: {fileID: 0}
     - target: {fileID: 2954282813540812244, guid: 62d9f53ed61a6a441bf315968e97e3e1,
         type: 3}

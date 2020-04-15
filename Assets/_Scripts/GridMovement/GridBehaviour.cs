@@ -40,15 +40,28 @@ public class GridBehaviour : MonoBehaviour
     public int endX = 2;
     public int endY = 2;
 
-    List<GameObject> path = new List<GameObject>();
+    public List<GameObject> path = new List<GameObject>();
 
+    [SerializeField]
     private bool findDistance = false;
+
+    /// <summary>
+    /// Is the controlled pawn bound to move?
+    /// </summary>
+    public bool movePawn = false;
+
+    /// <summary>
+    /// Will manage dynamically through turn management and player indexing which player pawn must be moved
+    /// </summary>
+    [SerializeField]
+    private GameObject movedPawn;
 
     #endregion
 
     private void Awake()
     {
         gridArray = new GameObject[columns , rows];
+        movedPawn = FindObjectOfType<PlayerMovement>().gameObject;
 
         if (gridPrefab)
             GenerateGrid();
@@ -143,6 +156,8 @@ public class GridBehaviour : MonoBehaviour
             y = tempObj.GetComponent<GridStat>().y;
             tempList.Clear();
         }
+
+        movePawn = true;
     }
 
     void InitialSetup()
