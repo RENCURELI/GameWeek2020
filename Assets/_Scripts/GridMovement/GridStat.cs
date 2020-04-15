@@ -11,10 +11,15 @@ public class GridStat : MonoBehaviour
     public int x = 0;
     public int y = 0;
 
+    /// <summary>
+    /// Index used to define grid number
+    /// </summary>
+    public int index = 0;
+
     // Start is called before the first frame update
     void Start()
     {
-        
+        Debug.Log(index);
     }
 
     // Update is called once per frame

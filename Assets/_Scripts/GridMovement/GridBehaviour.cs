@@ -84,17 +84,26 @@ public class GridBehaviour : MonoBehaviour
 
     void GenerateGrid()
     {
+        int tempIndexI = 0;
+        int tempIndexJ = 0;
         for (int i = 0; i < columns; i++)
         {
+            
             for (int j = 0; j < rows; j++)
             {
+                
                 GameObject instance = Instantiate(gridPrefab, new Vector3(generationStart.x + scale * i, generationStart.y, generationStart.z + scale * j), Quaternion.identity);
+                
                 instance.transform.SetParent(gameObject.transform);
                 instance.GetComponent<GridStat>().x = i;
                 instance.GetComponent<GridStat>().y = j;
 
                 gridArray[i, j] = instance;
+                instance.GetComponent<GridStat>().index = tempIndexI + tempIndexJ;
+                tempIndexJ++;
             }
+            --tempIndexJ;
+            tempIndexI++;
         }
     }
 
