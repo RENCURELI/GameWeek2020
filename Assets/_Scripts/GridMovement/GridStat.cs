@@ -4,6 +4,9 @@ using UnityEngine;
 
 public class GridStat : MonoBehaviour
 {
+    /// <summary>
+    /// Define if point has been visited (-1 = no)
+    /// </summary>
     public int visited = -1;
     public int x = 0;
     public int y = 0;
