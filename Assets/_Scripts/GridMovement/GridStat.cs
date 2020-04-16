@@ -23,7 +23,7 @@ public class GridStat : MonoBehaviour
 
     public NODETYPE nodeType;
     // Start is called before the first frame update
-    void Awake()
+    void Start()
     {
         gm = FindObjectOfType<GameManager>();
 

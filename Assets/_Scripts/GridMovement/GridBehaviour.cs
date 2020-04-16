@@ -99,10 +99,20 @@ public class GridBehaviour : MonoBehaviour
                 instance.GetComponent<GridStat>().y = j;
 
                 //Determine mathematical rule to define all node types on instanciation
-                instance.GetComponent<GridStat>().nodeType = GridStat.NODETYPE.Standard;
+                
+                //instance.GetComponent<GridStat>().nodeType = GridStat.NODETYPE.Standard;
 
                 gridArray[i, j] = instance;
                 instance.GetComponent<GridStat>().index = tempIndexI + tempIndexJ;
+                if(instance.GetComponent<GridStat>().index % 10 == 1)
+                {
+                    Debug.Log("Enterred condition");
+                    instance.GetComponent<GridStat>().nodeType = GridStat.NODETYPE.Rest;
+                }
+                else
+                {
+                    instance.GetComponent<GridStat>().nodeType = GridStat.NODETYPE.Standard;
+                }
                 tempIndexJ++;
             }
             --tempIndexJ;
