@@ -129,8 +129,10 @@ public class GridBehaviour : MonoBehaviour
     void SetPath()
     {
         int step;
+        
         int x = endX;
         int y = endY;
+        
 
         List<GameObject> tempList = new List<GameObject>();
 
@@ -165,7 +167,7 @@ public class GridBehaviour : MonoBehaviour
             y = tempObj.GetComponent<GridStat>().y;
             tempList.Clear();
         }
-
+        FindObjectOfType<PlayerMovement>().nextMoveIndex = path.Count - 1;
         movePawn = true;
     }
 

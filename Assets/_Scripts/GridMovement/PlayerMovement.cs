@@ -11,7 +11,7 @@ public class PlayerMovement : MonoBehaviour
     /// </summary>
     public int g_index;
 
-    private int nextMoveIndex = 0;
+    public int nextMoveIndex = 0;
 
     /// <summary>
     /// Player movement speed (Visual speed during pawn movement)
@@ -19,7 +19,7 @@ public class PlayerMovement : MonoBehaviour
     public int speed;
 
     //Destination grid square index
-    private int destDistance = 0;
+    //private int destDistance = 0;
 
     List<GameObject> pathList = new List<GameObject>();
     
@@ -31,13 +31,20 @@ public class PlayerMovement : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        if (FindObjectOfType<GridBehaviour>().movePawn == true)
+        if (FindObjectOfType<GridBehaviour>().movePawn == true && nextMoveIndex >= 0)
         {
             pathList = new List<GameObject>(FindObjectOfType<GridBehaviour>().path);
             transform.position = Vector3.MoveTowards(transform.position, pathList[nextMoveIndex].transform.position, Time.deltaTime * speed);
+            //nextMoveIndex = pathList.Count - 1;
 
             if (transform.position == pathList[nextMoveIndex].transform.position)
-                nextMoveIndex = (nextMoveIndex + 1) % pathList.Count;
+                nextMoveIndex = (nextMoveIndex - 1);
+            else if (nextMoveIndex <= 0)
+            {
+                nextMoveIndex = 0;
+                return;
+            }
+                
         }
         
     }

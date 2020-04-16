@@ -716,8 +716,8 @@ MonoBehaviour:
   generationStart: {x: 0, y: 0, z: 0}
   startX: 0
   startY: 0
-  endX: 4
-  endY: 9
+  endX: 2
+  endY: 2
   path: []
   findDistance: 0
   movePawn: 0
