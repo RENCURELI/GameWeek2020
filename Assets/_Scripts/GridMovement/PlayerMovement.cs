@@ -5,10 +5,7 @@ using UnityEngine;
 
 public class PlayerMovement : MonoBehaviour
 {
-    /// <summary>
-    /// Player index used for turn management
-    /// </summary>
-    public int g_index;
+    
 
     public int nextMoveIndex = 0;
 
