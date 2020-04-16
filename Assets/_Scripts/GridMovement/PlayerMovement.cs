@@ -18,30 +18,32 @@ public class PlayerMovement : MonoBehaviour
     /// </summary>
     public int speed;
 
-    //Destination grid square index
-    //private int destDistance = 0;
+    GridBehaviour gridManager;
 
     List<GameObject> pathList = new List<GameObject>();
     
     void Awake()
     {
+        gridManager = FindObjectOfType<GridBehaviour>();
         speed = 15;
     }
 
     // Update is called once per frame
     void Update()
     {
-        if (FindObjectOfType<GridBehaviour>().movePawn == true && nextMoveIndex >= 0)
+        if (gridManager.movePawn == true && nextMoveIndex >= 0)
         {
-            pathList = new List<GameObject>(FindObjectOfType<GridBehaviour>().path);
+            pathList = new List<GameObject>(gridManager.path);
             transform.position = Vector3.MoveTowards(transform.position, pathList[nextMoveIndex].transform.position, Time.deltaTime * speed);
-            //nextMoveIndex = pathList.Count - 1;
 
             if (transform.position == pathList[nextMoveIndex].transform.position)
                 nextMoveIndex = (nextMoveIndex - 1);
             else if (nextMoveIndex <= 0)
             {
                 nextMoveIndex = 0;
+                gridManager.startX = gridManager.endX;
+                gridManager.startY = gridManager.endY;
+
                 return;
             }
                 
@@ -52,6 +54,7 @@ public class PlayerMovement : MonoBehaviour
     public void DestDist()
     {
         int dieCast = Random.Range(1, 7);
-        Debug.Log(dieCast);
+        nextMoveIndex = dieCast;
+        
     }
 }

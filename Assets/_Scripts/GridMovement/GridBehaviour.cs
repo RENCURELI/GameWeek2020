@@ -2,8 +2,6 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-//NOTE : WILL HAVE TO ADD GRID POINT INDEXES TO SIMULATE NUMERAL GRID SPACES
-
 
 public class GridBehaviour : MonoBehaviour
 {
