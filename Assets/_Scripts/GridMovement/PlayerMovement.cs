@@ -42,7 +42,7 @@ public class PlayerMovement : MonoBehaviour
             {
                 currentIndex = pathList[nextMoveIndex].GetComponent<GridStat>().index;
                 nextMoveIndex = 0;
-                
+                FindObjectOfType<CombatManager>().combatStart = true;
                 gridManager.startX = gridManager.endX;
                 gridManager.startY = gridManager.endY;
                 gridManager.movePawn = false;
