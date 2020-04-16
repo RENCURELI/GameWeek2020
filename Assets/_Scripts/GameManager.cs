@@ -10,6 +10,7 @@ public class GameManager : MonoBehaviour
     public Material ladderMat;
     public Material snakeMat;
     public Material restMat;
+    public Material endMat;
 
 
     #endregion

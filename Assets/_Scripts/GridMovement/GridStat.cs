@@ -19,7 +19,7 @@ public class GridStat : MonoBehaviour
     /// </summary>
     public int index = 0;
 
-    public enum NODETYPE { Standard , Rest , Snake , Ladder }
+    public enum NODETYPE { Standard , Rest , Snake , Ladder , End}
 
     public NODETYPE nodeType;
     // Start is called before the first frame update
@@ -42,6 +42,10 @@ public class GridStat : MonoBehaviour
         else if (nodeType == NODETYPE.Snake)
         {
             GetComponent<Renderer>().material = gm.snakeMat;
+        }
+        else
+        {
+            GetComponent<Renderer>().material = gm.endMat;
         }
     }
 

@@ -918,6 +918,11 @@ PrefabInstance:
       propertyPath: snakeMat
       value: 
       objectReference: {fileID: 2100000, guid: fe01be0502daa504b868d5a4216faca4, type: 2}
+    - target: {fileID: 2474591198392452408, guid: b57e739a634627b4792ca416888a26f7,
+        type: 3}
+      propertyPath: endMat
+      value: 
+      objectReference: {fileID: 2100000, guid: e086a3a0fe562924cb621ae3fcb8c14f, type: 2}
     - target: {fileID: 9214110847154722777, guid: b57e739a634627b4792ca416888a26f7,
         type: 3}
       propertyPath: m_LocalPosition.x

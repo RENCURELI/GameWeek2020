@@ -41,14 +41,17 @@ public class PlayerMovement : MonoBehaviour
             else if (nextMoveIndex <= 0)
             {
                 currentIndex = pathList[nextMoveIndex].GetComponent<GridStat>().index;
-
-                /*if (pathList[nextMoveIndex].GetComponent<GridStat>().)
+                
+                if (pathList[nextMoveIndex].GetComponent<GridStat>().nodeType == GridStat.NODETYPE.Rest)
                 {
-
-                }*/
+                    this.GetComponent<PlayerStats>().hp = 100;
+                    Debug.Log(GetComponent<PlayerStats>().hp);
+                }
+                else
+                    FindObjectOfType<CombatManager>().combatStart = true;
 
                 nextMoveIndex = 0;
-                FindObjectOfType<CombatManager>().combatStart = true;
+                
                 
                 gridManager.startX = gridManager.endX;
                 gridManager.startY = gridManager.endY;

@@ -97,10 +97,7 @@ public class GridBehaviour : MonoBehaviour
                 instance.transform.SetParent(gameObject.transform);
                 instance.GetComponent<GridStat>().x = i;
                 instance.GetComponent<GridStat>().y = j;
-
-                //Determine mathematical rule to define all node types on instanciation
                 
-                //instance.GetComponent<GridStat>().nodeType = GridStat.NODETYPE.Standard;
 
                 gridArray[i, j] = instance;
                 instance.GetComponent<GridStat>().index = tempIndexI + tempIndexJ;
@@ -108,6 +105,18 @@ public class GridBehaviour : MonoBehaviour
                 {
                     Debug.Log("Enterred condition");
                     instance.GetComponent<GridStat>().nodeType = GridStat.NODETYPE.Rest;
+                }
+                else if (instance.GetComponent<GridStat>().index % 7 == 1)
+                {
+                    instance.GetComponent<GridStat>().nodeType = GridStat.NODETYPE.Ladder;
+                }
+                else if (instance.GetComponent<GridStat>().index % 7 == 3)
+                {
+                    instance.GetComponent<GridStat>().nodeType = GridStat.NODETYPE.Snake;
+                }
+                else if (instance.GetComponent<GridStat>().index == (columns * rows) - 1)
+                {
+                    instance.GetComponent<GridStat>().nodeType = GridStat.NODETYPE.End;
                 }
                 else
                 {
