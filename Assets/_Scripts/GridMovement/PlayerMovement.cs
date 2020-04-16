@@ -1,7 +1,6 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
-//using UnityEngine.Events;
 
 
 public class PlayerMovement : MonoBehaviour
@@ -57,5 +56,18 @@ public class PlayerMovement : MonoBehaviour
     {
         int dieCast = Random.Range(1, 7);
         nextMoveIndex = currentIndex + dieCast;
+        gridManager.SetDistance();
+        GameObject tempNode;
+        foreach (GameObject node in gridManager.gridArray)
+        {
+            if (node.GetComponent<GridStat>().index == nextMoveIndex)
+            {
+                tempNode = node;
+                gridManager.endX = tempNode.GetComponent<GridStat>().x;
+                gridManager.endY = tempNode.GetComponent<GridStat>().y;
+            }
+        }
+
+        gridManager.SetPath();
     }
 }

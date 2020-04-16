@@ -35,8 +35,8 @@ public class GridBehaviour : MonoBehaviour
     public int startX = 0;
     public int startY = 0;
 
-    public int endX = 2;
-    public int endY = 2;
+    public int endX = 0;
+    public int endY = 0;
 
     public List<GameObject> path = new List<GameObject>();
 
@@ -105,7 +105,7 @@ public class GridBehaviour : MonoBehaviour
         }
     }
 
-    void SetDistance()
+    public void SetDistance()
     {
         InitialSetup();
         int x = startX;
@@ -124,20 +124,11 @@ public class GridBehaviour : MonoBehaviour
         }
     }
 
-    void SetPath()
+    public void SetPath()
     {
         int step;
         
         List<GameObject> tempList = new List<GameObject>();
-
-        foreach(GameObject node in tempList)
-        {
-            if (node.GetComponent<GridStat>().index == FindObjectOfType<PlayerMovement>().nextMoveIndex)
-            {
-                endX = node.GetComponent<GridStat>().x;
-                endY = node.GetComponent<GridStat>().y;
-            }
-        }
 
         int x = endX;
         int y = endY;
