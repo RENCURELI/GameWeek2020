@@ -48,16 +48,23 @@ public class PlayerMovement : MonoBehaviour
                 }
                 else if (pathList[nextMoveIndex].GetComponent<GridStat>().nodeType == GridStat.NODETYPE.Ladder)
                 {
-                    GridStat[] nodes = FindObjectsOfType<GridStat>();
+                    GridStat[] nodes = FindObjectsOfType<GridStat>(); //indexation probably off
+
+                    foreach (GridStat node in nodes)
+                    {
+                        Debug.Log(node.index);
+                    }
+
                     //Move to next ladder node
-                    for (int i = currentIndex - 1; i > 0; i--)
+                    for (int i = currentIndex - 1; i >= 0; i--)
                     {
                         Debug.Log(currentIndex);
                         if (nodes[i].nodeType == GridStat.NODETYPE.Ladder)
                         {
                             destIndex = nodes[i].index + 1;
-                            Debug.Log("USING LADDER");
+                            Debug.Log("USING LADDER" + destIndex);
                             StartPlayerMove();
+                            break;
                         }
                     }
                 }
@@ -65,6 +72,11 @@ public class PlayerMovement : MonoBehaviour
                 {
                     //Move to next snake node
                     GridStat[] nodes = FindObjectsOfType<GridStat>();
+
+                    foreach (GridStat node in nodes)
+                    {
+                        Debug.Log(node.index);
+                    }
                     //Move to next ladder node
                     for (int i = currentIndex + 1; i < gridManager.gridArray.Length - 1; i++)
                     {
@@ -72,8 +84,9 @@ public class PlayerMovement : MonoBehaviour
                         if (nodes[i].nodeType == GridStat.NODETYPE.Snake)
                         {
                             destIndex = nodes[i].index + 1;
-                            Debug.Log("USING SNAKE");
+                            Debug.Log("USING SNAKE" + destIndex);
                             StartPlayerMove();
+                            break;
                         }
                     }
                 }
