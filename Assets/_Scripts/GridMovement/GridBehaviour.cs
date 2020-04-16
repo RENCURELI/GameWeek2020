@@ -54,6 +54,8 @@ public class GridBehaviour : MonoBehaviour
     [SerializeField]
     private GameObject movedPawn;
 
+    
+
     #endregion
 
     private void Awake()
@@ -95,6 +97,9 @@ public class GridBehaviour : MonoBehaviour
                 instance.transform.SetParent(gameObject.transform);
                 instance.GetComponent<GridStat>().x = i;
                 instance.GetComponent<GridStat>().y = j;
+
+                //Determine mathematical rule to define all node types on instanciation
+                instance.GetComponent<GridStat>().nodeType = GridStat.NODETYPE.Standard;
 
                 gridArray[i, j] = instance;
                 instance.GetComponent<GridStat>().index = tempIndexI + tempIndexJ;

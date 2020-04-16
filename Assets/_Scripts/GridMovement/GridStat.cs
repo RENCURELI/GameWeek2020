@@ -11,15 +11,26 @@ public class GridStat : MonoBehaviour
     public int x = 0;
     public int y = 0;
 
+    [SerializeField]
+    private GameManager gm;
+
     /// <summary>
     /// Index used to define grid number
     /// </summary>
     public int index = 0;
 
+    public enum NODETYPE { Standard , Rest , Snake , Ladder }
+
+    public NODETYPE nodeType;
     // Start is called before the first frame update
-    void Start()
+    void Awake()
     {
-        
+        gm = FindObjectOfType<GameManager>();
+
+        if(nodeType == NODETYPE.Standard)
+        {
+            GetComponent<Renderer>().material = gm.standardMat;
+        }
     }
 
     // Update is called once per frame

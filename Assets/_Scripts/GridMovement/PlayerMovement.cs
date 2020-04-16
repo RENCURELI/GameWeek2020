@@ -41,8 +41,15 @@ public class PlayerMovement : MonoBehaviour
             else if (nextMoveIndex <= 0)
             {
                 currentIndex = pathList[nextMoveIndex].GetComponent<GridStat>().index;
+
+                /*if (pathList[nextMoveIndex].GetComponent<GridStat>().)
+                {
+
+                }*/
+
                 nextMoveIndex = 0;
                 FindObjectOfType<CombatManager>().combatStart = true;
+                
                 gridManager.startX = gridManager.endX;
                 gridManager.startY = gridManager.endY;
                 gridManager.movePawn = false;

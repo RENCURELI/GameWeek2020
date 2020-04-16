@@ -4,6 +4,16 @@ using UnityEngine;
 
 public class GameManager : MonoBehaviour
 {
+    #region Variables
+
+    public Material standardMat;
+    public Material ladderMat;
+    public Material snakedMat;
+    public Material restMat;
+
+
+    #endregion
+
     // Start is called before the first frame update
     void Start()
     {
