@@ -45,18 +45,53 @@ public class PlayerMovement : MonoBehaviour
                 if (pathList[nextMoveIndex].GetComponent<GridStat>().nodeType == GridStat.NODETYPE.Rest)
                 {
                     this.GetComponent<PlayerStats>().hp = 100;
-                    Debug.Log(GetComponent<PlayerStats>().hp);
+                }
+                else if (pathList[nextMoveIndex].GetComponent<GridStat>().nodeType == GridStat.NODETYPE.Ladder)
+                {
+                    GridStat[] nodes = FindObjectsOfType<GridStat>();
+                    //Move to next ladder node
+                    for (int i = currentIndex - 1; i > 0; i--)
+                    {
+                        Debug.Log(currentIndex);
+                        if (nodes[i].nodeType == GridStat.NODETYPE.Ladder)
+                        {
+                            destIndex = nodes[i].index + 1;
+                            Debug.Log("USING LADDER");
+                            StartPlayerMove();
+                        }
+                    }
+                }
+                else if (pathList[nextMoveIndex].GetComponent<GridStat>().nodeType == GridStat.NODETYPE.Snake)
+                {
+                    //Move to next snake node
+                    GridStat[] nodes = FindObjectsOfType<GridStat>();
+                    //Move to next ladder node
+                    for (int i = currentIndex + 1; i < gridManager.gridArray.Length - 1; i++)
+                    {
+                        Debug.Log(currentIndex);
+                        if (nodes[i].nodeType == GridStat.NODETYPE.Snake)
+                        {
+                            destIndex = nodes[i].index + 1;
+                            Debug.Log("USING SNAKE");
+                            StartPlayerMove();
+                        }
+                    }
                 }
                 else
+                {
                     FindObjectOfType<CombatManager>().combatStart = true;
+                    gridManager.movePawn = false;
+                }
 
-                nextMoveIndex = 0;
-                
-                
-                gridManager.startX = gridManager.endX;
-                gridManager.startY = gridManager.endY;
-                gridManager.movePawn = false;
-                return;
+                if (!gridManager.movePawn)
+                {
+                    nextMoveIndex = 0;
+
+                    gridManager.startX = gridManager.endX;
+                    gridManager.startY = gridManager.endY;
+                    gridManager.movePawn = false;
+                    return;
+                }
             }
                 
         }
@@ -66,10 +101,12 @@ public class PlayerMovement : MonoBehaviour
     public void DestDist()
     {
         int dieCast = Random.Range(1, 7);
-        Debug.Log("CAST VALUE : " + dieCast);
-        //nextMoveIndex = currentIndex + dieCast;
         destIndex = currentIndex + dieCast;
-        Debug.Log("DESTINATION INDEX : " + destIndex);
+        StartPlayerMove();
+    }
+
+    public void StartPlayerMove()
+    {
         gridManager.SetDistance();
         GameObject tempNode;
         foreach (GameObject node in gridManager.gridArray)

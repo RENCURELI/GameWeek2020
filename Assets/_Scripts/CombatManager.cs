@@ -37,7 +37,7 @@ public class CombatManager : MonoBehaviour
             enemyEvade = Random.Range(10, 26);
             enemyDmg = Random.Range(5, 11);
 
-            Debug.Log(enemyHp + " " + enemyEvade + " " + enemyDmg);
+            //Debug.Log(enemyHp + " " + enemyEvade + " " + enemyDmg);
             do
             {
                 if (Random.Range(0, 101) > enemyEvade)

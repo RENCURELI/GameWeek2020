@@ -103,7 +103,6 @@ public class GridBehaviour : MonoBehaviour
                 instance.GetComponent<GridStat>().index = tempIndexI + tempIndexJ;
                 if(instance.GetComponent<GridStat>().index % 10 == 1)
                 {
-                    Debug.Log("Enterred condition");
                     instance.GetComponent<GridStat>().nodeType = GridStat.NODETYPE.Rest;
                 }
                 else if (instance.GetComponent<GridStat>().index % 7 == 1)
