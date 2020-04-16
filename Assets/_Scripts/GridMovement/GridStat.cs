@@ -27,9 +27,21 @@ public class GridStat : MonoBehaviour
     {
         gm = FindObjectOfType<GameManager>();
 
-        if(nodeType == NODETYPE.Standard)
+        if (nodeType == NODETYPE.Standard)
         {
             GetComponent<Renderer>().material = gm.standardMat;
+        }
+        else if (nodeType == NODETYPE.Rest)
+        {
+            GetComponent<Renderer>().material = gm.restMat;
+        }
+        else if (nodeType == NODETYPE.Ladder)
+        {
+            GetComponent<Renderer>().material = gm.ladderMat;
+        }
+        else if (nodeType == NODETYPE.Snake)
+        {
+            GetComponent<Renderer>().material = gm.snakeMat;
         }
     }
 

@@ -890,7 +890,22 @@ PrefabInstance:
         type: 3}
       propertyPath: standardMat
       value: 
+      objectReference: {fileID: 2100000, guid: 5cef3dc224d001f449d6f22e243c1609, type: 2}
+    - target: {fileID: 2474591198392452408, guid: b57e739a634627b4792ca416888a26f7,
+        type: 3}
+      propertyPath: ladderMat
+      value: 
       objectReference: {fileID: 2100000, guid: 838b81ffc454432409ef36bd7ecffa60, type: 2}
+    - target: {fileID: 2474591198392452408, guid: b57e739a634627b4792ca416888a26f7,
+        type: 3}
+      propertyPath: restMat
+      value: 
+      objectReference: {fileID: 2100000, guid: 2a045e446be202f488127e12843a686f, type: 2}
+    - target: {fileID: 2474591198392452408, guid: b57e739a634627b4792ca416888a26f7,
+        type: 3}
+      propertyPath: snakeMat
+      value: 
+      objectReference: {fileID: 2100000, guid: fe01be0502daa504b868d5a4216faca4, type: 2}
     - target: {fileID: 9214110847154722777, guid: b57e739a634627b4792ca416888a26f7,
         type: 3}
       propertyPath: m_LocalPosition.x

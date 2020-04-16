@@ -8,7 +8,7 @@ public class GameManager : MonoBehaviour
 
     public Material standardMat;
     public Material ladderMat;
-    public Material snakedMat;
+    public Material snakeMat;
     public Material restMat;
 
 
