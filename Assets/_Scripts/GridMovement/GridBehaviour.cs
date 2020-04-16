@@ -128,14 +128,23 @@ public class GridBehaviour : MonoBehaviour
     {
         int step;
         
+        List<GameObject> tempList = new List<GameObject>();
+
+        foreach(GameObject node in tempList)
+        {
+            if (node.GetComponent<GridStat>().index == FindObjectOfType<PlayerMovement>().nextMoveIndex)
+            {
+                endX = node.GetComponent<GridStat>().x;
+                endY = node.GetComponent<GridStat>().y;
+            }
+        }
+
         int x = endX;
         int y = endY;
-        
-
-        List<GameObject> tempList = new List<GameObject>();
 
         path.Clear();
 
+        //Set detination point
         if (gridArray[endX, endY] && gridArray[endX, endY].GetComponent<GridStat>().visited > 0)
         {
             path.Add(gridArray[x, y]);

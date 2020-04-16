@@ -13,6 +13,8 @@ public class PlayerMovement : MonoBehaviour
 
     public int nextMoveIndex = 0;
 
+    public int currentIndex = 0;
+
     /// <summary>
     /// Player movement speed (Visual speed during pawn movement)
     /// </summary>
@@ -43,7 +45,7 @@ public class PlayerMovement : MonoBehaviour
                 nextMoveIndex = 0;
                 gridManager.startX = gridManager.endX;
                 gridManager.startY = gridManager.endY;
-
+                gridManager.movePawn = false;
                 return;
             }
                 
@@ -54,7 +56,6 @@ public class PlayerMovement : MonoBehaviour
     public void DestDist()
     {
         int dieCast = Random.Range(1, 7);
-        nextMoveIndex = dieCast;
-        
+        nextMoveIndex = currentIndex + dieCast;
     }
 }
