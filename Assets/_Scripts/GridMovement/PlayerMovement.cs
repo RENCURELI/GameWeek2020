@@ -14,6 +14,8 @@ public class PlayerMovement : MonoBehaviour
 
     public int currentIndex = 0;
 
+    private int destIndex = 0;
+
     /// <summary>
     /// Player movement speed (Visual speed during pawn movement)
     /// </summary>
@@ -41,7 +43,9 @@ public class PlayerMovement : MonoBehaviour
                 nextMoveIndex = (nextMoveIndex - 1);
             else if (nextMoveIndex <= 0)
             {
+                currentIndex = pathList[nextMoveIndex].GetComponent<GridStat>().index;
                 nextMoveIndex = 0;
+                
                 gridManager.startX = gridManager.endX;
                 gridManager.startY = gridManager.endY;
                 gridManager.movePawn = false;
@@ -55,12 +59,15 @@ public class PlayerMovement : MonoBehaviour
     public void DestDist()
     {
         int dieCast = Random.Range(1, 7);
-        nextMoveIndex = currentIndex + dieCast;
+        Debug.Log("CAST VALUE : " + dieCast);
+        //nextMoveIndex = currentIndex + dieCast;
+        destIndex = currentIndex + dieCast;
+        Debug.Log("DESTINATION INDEX : " + destIndex);
         gridManager.SetDistance();
         GameObject tempNode;
         foreach (GameObject node in gridManager.gridArray)
         {
-            if (node.GetComponent<GridStat>().index == nextMoveIndex)
+            if (node.GetComponent<GridStat>().index == destIndex)
             {
                 tempNode = node;
                 gridManager.endX = tempNode.GetComponent<GridStat>().x;
