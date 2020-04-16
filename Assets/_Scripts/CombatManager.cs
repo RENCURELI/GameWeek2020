@@ -40,9 +40,21 @@ public class CombatManager : MonoBehaviour
             Debug.Log(enemyHp + " " + enemyEvade + " " + enemyDmg);
             do
             {
-                enemyHp -= 5;
-                Debug.Log(enemyHp);
-            } while (enemyHp > 0);
+                if (Random.Range(0, 101) > enemyEvade)
+                {
+                    enemyHp -= currentPawn.dmg;
+                }
+
+                if (Random.Range(0, 100) > currentPawn.evadeProb)
+                {
+                    currentPawn.hp -= enemyDmg;
+                }
+
+            } while (enemyHp > 0 || currentPawn.hp > 0);
+            if (enemyHp < 0)
+                Debug.Log("Player Won");
+            else
+                Debug.Log("Player Lost");
             EndFight();
         }
     }
