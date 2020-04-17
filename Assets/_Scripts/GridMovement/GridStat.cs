@@ -48,10 +48,4 @@ public class GridStat : MonoBehaviour
             GetComponent<Renderer>().material = gm.endMat;
         }
     }
-
-    // Update is called once per frame
-    void Update()
-    {
-        
-    }
 }

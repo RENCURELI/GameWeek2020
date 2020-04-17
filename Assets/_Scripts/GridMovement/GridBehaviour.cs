@@ -31,12 +31,14 @@ public class GridBehaviour : MonoBehaviour
     /// </summary>
     public Vector3 generationStart = new Vector3(0, 0, 0);
 
-    public GameObject[,] gridArray;
-    public int startX = 0;
-    public int startY = 0;
+    public GameObject[] gridArray; //was 2D
+    public int startIndex = 0;
+    //public int startX = 0;
+    //public int startY = 0;
 
-    public int endX = 0;
-    public int endY = 0;
+    public int endIndex = 0;
+    //public int endX = 0;
+    //public int endY = 0;
 
     public List<GameObject> path = new List<GameObject>();
 
@@ -60,7 +62,7 @@ public class GridBehaviour : MonoBehaviour
 
     private void Awake()
     {
-        gridArray = new GameObject[columns , rows];
+        gridArray = new GameObject[columns * rows];
         movedPawn = FindObjectOfType<PlayerMovement>().gameObject;
 
         if (gridPrefab)
@@ -99,7 +101,7 @@ public class GridBehaviour : MonoBehaviour
                 instance.GetComponent<GridStat>().y = j;
                 
 
-                gridArray[i, j] = instance;
+                gridArray[tempIndexI + tempIndexJ] = instance;
                 instance.GetComponent<GridStat>().index = tempIndexI + tempIndexJ;
                 if(instance.GetComponent<GridStat>().index % 10 == 1)
                 {
@@ -131,8 +133,9 @@ public class GridBehaviour : MonoBehaviour
     public void SetDistance()
     {
         InitialSetup();
-        int x = startX;
-        int y = startY;
+        //int x = startX;
+        //int y = startY;
+        int start = startIndex;
         int[] testArray = new int[rows * columns];
         
         for (int step = 1; step < rows*columns; step++)
@@ -141,7 +144,7 @@ public class GridBehaviour : MonoBehaviour
             {
                 if (instance && instance.GetComponent<GridStat>().visited == step-1)
                 {
-                    TestFourDirections(instance.GetComponent<GridStat>().x, instance.GetComponent<GridStat>().y, step);
+                    TestFourDirections(instance.GetComponent<GridStat>().index, step);
                 }
             }
         }
@@ -153,16 +156,18 @@ public class GridBehaviour : MonoBehaviour
         
         List<GameObject> tempList = new List<GameObject>();
 
-        int x = endX;
-        int y = endY;
+        //int x = endX;
+        //int y = endY;
+        int dest = endIndex;
+
 
         path.Clear();
 
         //Set detination point
-        if (gridArray[endX, endY] && gridArray[endX, endY].GetComponent<GridStat>().visited > 0)
+        if (gridArray[endIndex] && gridArray[endIndex].GetComponent<GridStat>().visited > 0)
         {
-            path.Add(gridArray[x, y]);
-            step = gridArray[x, y].GetComponent<GridStat>().visited - 1;
+            path.Add(gridArray[dest]);
+            step = gridArray[dest].GetComponent<GridStat>().visited - 1;
         }
         else
         {
@@ -173,19 +178,19 @@ public class GridBehaviour : MonoBehaviour
         //Check path going from destination to starting point
         for (int i = step; step>-1; step--)
         {
-            if (TestDir(x, y, step, 1))
-                tempList.Add(gridArray[x, y + 1]);
-            if (TestDir(x, y, step, 2))
+            if (TestDir(dest, step, 1))
+                tempList.Add(gridArray[dest + 1]);
+            /*if (TestDir(dest, step, 2))
                 tempList.Add(gridArray[x + 1, y]);
             if (TestDir(x, y, step, 3))
-                tempList.Add(gridArray[x, y - 1]);
-            if (TestDir(x, y, step, 4))
-                tempList.Add(gridArray[x - 1, y]);
+                tempList.Add(gridArray[x, y - 1]);*/
+            if (TestDir(dest, step, 3))
+                tempList.Add(gridArray[dest - 1]);
 
-            GameObject tempObj = FindClosest(gridArray[endX, endY].transform, tempList);
+            GameObject tempObj = FindClosest(gridArray[endIndex].transform, tempList);
             path.Add(tempObj);
-            x = tempObj.GetComponent<GridStat>().x;
-            y = tempObj.GetComponent<GridStat>().y;
+            //x = tempObj.GetComponent<GridStat>().x;
+            dest = tempObj.GetComponent<GridStat>().index;
             tempList.Clear();
         }
         FindObjectOfType<PlayerMovement>().nextMoveIndex = path.Count - 1;
@@ -200,7 +205,7 @@ public class GridBehaviour : MonoBehaviour
             instance.GetComponent<GridStat>().visited = -1;
         }
         //Start point is set to 0 (visited)
-        gridArray[startX, startY].GetComponent<GridStat>().visited = 0;
+        gridArray[startIndex].GetComponent<GridStat>().visited = 0;
     }
 
     /// <summary>
@@ -211,20 +216,20 @@ public class GridBehaviour : MonoBehaviour
     /// <param name="step"></param>
     /// <param name="dir"></param>
     /// <returns></returns>
-    bool TestDir(int x, int y, int step, int dir)
+    bool TestDir(int destIndex, int step, int dir)
     {
         
         switch(dir)
         {
             case 1:
-                if (y + 1 < rows && gridArray[x, y + 1] && gridArray[x, y + 1].GetComponent<GridStat>().visited == step)
+                if (destIndex + 1 < rows && gridArray[destIndex + 1] && gridArray[destIndex + 1].GetComponent<GridStat>().visited == step)
                 {
                     return true;
                 }
                 else
                     return false;
 
-            case 2:
+            /*case 2:
                 if (x + 1 < columns && gridArray[x + 1, y] && gridArray[x + 1, y].GetComponent<GridStat>().visited == step)
                     return true;
                 else
@@ -236,9 +241,9 @@ public class GridBehaviour : MonoBehaviour
                     return true;
                 }
                 else
-                    return false;
-            case 4:
-                if (x - 1 >= 0 && gridArray[x - 1, y] && gridArray[x - 1, y].GetComponent<GridStat>().visited == step)
+                    return false;*/
+            case 3:
+                if (destIndex - 1 >= 0 && gridArray[destIndex - 1] && gridArray[destIndex - 1].GetComponent<GridStat>().visited == step)
                 {
                     return true;
                 }
@@ -248,30 +253,30 @@ public class GridBehaviour : MonoBehaviour
         return false;
     }
 
-    void TestFourDirections(int x, int y, int step)
+    void TestFourDirections(int nextIndex, int step)
     {
-        if (TestDir(x,y,-1,1))
+        if (TestDir(nextIndex,-1,1))
         {
-            SetVisited(x, y + 1, step);
+            SetVisited(nextIndex + 1, step);
         }
-        if (TestDir(x,y,-1,2))
+        /*if (TestDir(x,y,-1,2))
         {
             SetVisited(x + 1, y, step);
         }
         if (TestDir(x,y,-1,3))
         {
             SetVisited(x, y - 1, step);
-        }
-        if (TestDir(x,y,-1,4))
+        }*/
+        if (TestDir(nextIndex,-1,3))
         {
-            SetVisited(x - 1, y, step);
+            SetVisited(nextIndex - 1, step);
         }
     }
 
-    void SetVisited(int x, int y, int step)
+    void SetVisited(int visitedIndex, int step)
     {
-        if (gridArray[x, y])
-            gridArray[x, y].GetComponent<GridStat>().visited = step;
+        if (gridArray[visitedIndex])
+            gridArray[visitedIndex].GetComponent<GridStat>().visited = step;
     }
 
     GameObject FindClosest(Transform targetLocation, List<GameObject> list)

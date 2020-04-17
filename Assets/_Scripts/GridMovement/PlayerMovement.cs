@@ -100,8 +100,8 @@ public class PlayerMovement : MonoBehaviour
                 {
                     nextMoveIndex = 0;
 
-                    gridManager.startX = gridManager.endX;
-                    gridManager.startY = gridManager.endY;
+                    //gridManager.startX = gridManager.endX;
+                    gridManager.startIndex = gridManager.endIndex;
                     gridManager.movePawn = false;
                     return;
                 }
@@ -127,8 +127,8 @@ public class PlayerMovement : MonoBehaviour
             if (node.GetComponent<GridStat>().index == destIndex)
             {
                 tempNode = node;
-                gridManager.endX = tempNode.GetComponent<GridStat>().x;
-                gridManager.endY = tempNode.GetComponent<GridStat>().y;
+                //gridManager.endX = tempNode.GetComponent<GridStat>().x;
+                gridManager.endIndex = tempNode.GetComponent<GridStat>().index;
             }
         }
 
