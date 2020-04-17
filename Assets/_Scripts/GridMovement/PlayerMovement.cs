@@ -64,7 +64,7 @@ public class PlayerMovement : MonoBehaviour
                             destIndex = nodes[i].index + 1;
                             Debug.Log("USING LADDER" + destIndex);
                             StartPlayerMove();
-                            break;
+                            return;
                         }
                     }
                 }
@@ -86,7 +86,7 @@ public class PlayerMovement : MonoBehaviour
                             destIndex = nodes[i].index + 1;
                             Debug.Log("USING SNAKE" + destIndex);
                             StartPlayerMove();
-                            break;
+                            return;
                         }
                     }
                 }
